@@ -1,20 +1,14 @@
 import{useEffect, useRef} from 'react';
 
 export function useTimeout(callback: () => void, delay: number) {
-  const callbackRef = useRef(callback);
-
+  const callbackref=useRef(callback);
   useEffect(()=>{
-    callbackRef.current=callback;
+    callbackref.current=callback;
   },[callback])
-
   useEffect(()=>{
-    const timer=setTimeout(()=>{
-      callbackRef.current();
-    },delay);
-    return ()=>{
-      clearTimeout(timer);
-    };
-  },[delay]);
+    const timer=setTimeout(()=>callbackref.current(),delay);
+    return ()=>clearTimeout(timer);
+  },[delay])
 }
 
 // if you want to try your code on the right panel
